@@ -1,0 +1,7 @@
+{
+  "cSpell.words": ["mincontent"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["javascript"]
+}
