@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js --open",
     "build": "webpack --config webpack.prod.js ",
+    "tailwind": "npx tailwindcss -i ./src/tailwind.css -o ./input.css --watch",
     "github": "git subtree push --prefix dist origin gh-pages"
   },
   "author": "Adem kedir",
@@ -23,6 +24,7 @@
     "sass": "^1.71.0",
     "sass-loader": "^14.1.0",
     "style-loader": "^3.3.4",
+    "tailwindcss": "^3.4.1",
     "webpack": "^5.90.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.2",
