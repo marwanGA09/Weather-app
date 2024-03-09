@@ -11,10 +11,10 @@ async function getWeatherFromApi(location) {
   return result;
 }
 console.log('warking');
-// const data = getWeatherFromApi('london');
-// console.log(data);
-// data.then((data) => console.log(data));
-// data.then((data) => console.log(data));
+const data = getWeatherFromApi('london');
+console.log(data);
+data.then((data) => console.log(data));
+data.then((data) => console.log(data));
 
 // name ,country, local ti``?me
 // temp c,f
