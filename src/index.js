@@ -1,6 +1,5 @@
 import './tailwind.css';
 const weatherApiKey = 'afbc932eb78247838c451817240703';
-const icon = document.querySelector('#icon');
 async function getWeatherFromApi(location) {
   for (let i = 0; i < 100000; i++) {}
   const weather = await fetch(
@@ -10,22 +9,25 @@ async function getWeatherFromApi(location) {
   return result;
 }
 
-const data = getWeatherFromApi('dire dawa');
-data.then((data) => {
-  console.log(data);
-  const locationContainer = document.querySelector('.location');
-  locationContainer.insertAdjacentHTML(
-    'afterbegin',
-    createLocationContent(data.location)
-  );
+function renderPage(place) {
+  getWeatherFromApi(place).then((data) => {
+    document
+      .querySelector('.location')
+      .insertAdjacentHTML('afterbegin', createLocationContent(data.location));
 
-  const weatherContainer = document.querySelector('.weather');
-  weatherContainer.insertAdjacentHTML(
-    'afterbegin',
-    createWeatherContent(data.current)
-  );
-});
+    document
+      .querySelector('.weather')
+      .insertAdjacentHTML('afterbegin', createWeatherContent(data.current));
+  });
+}
 
+renderPage('awash');
+function removeChild() {
+  const location = document.querySelectorAll('.location p');
+  location.forEach((p) => p.remove());
+  const weather = document.querySelectorAll('.weather div');
+  location.forEach((div) => div.remove());
+}
 function createLocationContent(location) {
   return `
             <p class="country text-2xl">${location.name}, ${location.country}</p>
@@ -66,6 +68,16 @@ function createWeatherContent(weather) {
               />
             </div> `;
 }
+
+const search = document.querySelector('#search');
+search.addEventListener('keydown', (event) => {
+  // console.log(event.key);
+  if (event.key === 'Enter') {
+    console.log(search.value);
+    removeChild();
+    renderPage(search.value);
+  }
+});
 
 // name ,country, local ti``?me
 // temp c,f
