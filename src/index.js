@@ -13,7 +13,8 @@ function renderPage(place) {
   weather
     .then((data) => {
       if (data.error) {
-        throw new Error(`${place} not found`);
+        console.log(data.error.message);
+        throw new Error(`${data.error.message}`);
       } else {
         document
           .querySelector('.location')
@@ -36,18 +37,21 @@ function renderPage(place) {
         'afterend',
         `<span class="error text-gray-200">${error.message}</span>`
       );
+      renderPage('addis abeba');
       // console.log(errorSpan);
     });
 }
 
 renderPage('addis abeba');
-renderPage('kjs;dlfakljfs');
 function removeChild() {
   const location = document.querySelectorAll('.location p');
   location.forEach((p) => p.remove());
   const weather = document.querySelectorAll('.weather div');
   weather.forEach((div) => div.remove());
-  document.querySelector('.error').innerHTML = '';
+  const error = document.querySelector('.error');
+  if (error != null) {
+    error.innerHTML = '';
+  }
 }
 function createLocationContent(location) {
   return `
@@ -98,13 +102,6 @@ search.addEventListener('keydown', (event) => {
     renderPage(search.value);
   }
 });
-
-async function tryFetch(location) {
-  const forecast = fetch(
-    `http://api.weatherapi.com/v1/sports.json?key=${weatherApiKey}&q=${location}`
-  );
-  return (await forecast).json();
-}
 
 // console.log(tryFetch('addis abeba'));
 
