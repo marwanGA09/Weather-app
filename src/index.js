@@ -7,14 +7,65 @@ async function getWeatherFromApi(location) {
     `https://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${location}`
   );
   const result = await weather.json();
-  console.log(result.current.condition.icon);
-  icon.src = result.current.condition.icon;
   return result;
 }
-console.log('warking');
-const data = getWeatherFromApi('addis abeba');
-console.log(data);
-data.then((data) => console.log(data));
+
+const data = getWeatherFromApi('dire dawa');
+data.then((data) => {
+  console.log(data);
+  const locationContainer = document.querySelector('.location');
+  locationContainer.insertAdjacentHTML(
+    'afterbegin',
+    createLocationContent(data.location)
+  );
+
+  const weatherContainer = document.querySelector('.weather');
+  weatherContainer.insertAdjacentHTML(
+    'afterbegin',
+    createWeatherContent(data.current)
+  );
+});
+
+function createLocationContent(location) {
+  return `
+            <p class="country text-2xl">${location.name}, ${location.country}</p>
+            <p class="time text-xl text-gray-300">${location.localtime}</p>`;
+}
+
+function createWeatherContent(weather) {
+  return `<div
+              class="condition md:flex md:justify-between md:items-center lg:col-span-3"
+            >
+              <span class="text">Weather condition: ${weather.condition.text}</span>
+              <div class="icon md:w-11 md:h-10">
+                <img id="icon" src="${weather.condition.icon}" alt="" />
+              </div>
+            </div>
+            <div class="flex justify-between md:items-center wind">
+              <p>Wind speed: ${weather.wind_kph}kmh to ${weather.wind_dir}</p>
+              <img
+                class="w-6 h-6 md:w-11 md:h-10"
+                src="./img/wind.png"
+                alt=""
+              />
+            </div>
+            <div class="flex justify-between md:items-center humidity">
+              <p>Humidity: ${weather.humidity}%</p>
+              <img
+                src="./img/humidity.webp"
+                alt=""
+                class="w-6 h-6 md:w-11 md:h-10"
+              />
+            </div>
+            <div class="flex justify-between md:items-center cloud">
+              <p>Cloud coverage: ${weather.cloud}%</p>
+              <img
+                src="./img/cloud.png"
+                alt=""
+                class="w-6 h-6 md:w-11 md:h-10"
+              />
+            </div> `;
+}
 
 // name ,country, local ti``?me
 // temp c,f
