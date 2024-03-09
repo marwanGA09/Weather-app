@@ -1,32 +1,53 @@
 import './tailwind.css';
 const weatherApiKey = 'afbc932eb78247838c451817240703';
 async function getWeatherFromApi(location) {
-  for (let i = 0; i < 100000; i++) {}
   const weather = await fetch(
-    `https://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${location}`
+    `https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${location}`
   );
-  const result = await weather.json();
-  return result;
+  return await weather.json();
 }
 
 function renderPage(place) {
-  getWeatherFromApi(place).then((data) => {
-    document
-      .querySelector('.location')
-      .insertAdjacentHTML('afterbegin', createLocationContent(data.location));
+  let weather = getWeatherFromApi(place);
+  console.log(weather);
+  weather
+    .then((data) => {
+      if (data.error) {
+        throw new Error(`${place} not found`);
+      } else {
+        document
+          .querySelector('.location')
+          .insertAdjacentHTML(
+            'afterbegin',
+            createLocationContent(data.location)
+          );
 
-    document
-      .querySelector('.weather')
-      .insertAdjacentHTML('afterbegin', createWeatherContent(data.current));
-  });
+        document
+          .querySelector('.weather')
+          .insertAdjacentHTML('afterbegin', createWeatherContent(data.current));
+      }
+      // console.log(data);
+    })
+    .catch((error) => {
+      // console.error(error);
+
+      const errorSpan = document.querySelector('#label');
+      errorSpan.insertAdjacentHTML(
+        'afterend',
+        `<span class="error text-gray-200">${error.message}</span>`
+      );
+      // console.log(errorSpan);
+    });
 }
 
-renderPage('awash');
+renderPage('addis abeba');
+renderPage('kjs;dlfakljfs');
 function removeChild() {
   const location = document.querySelectorAll('.location p');
   location.forEach((p) => p.remove());
   const weather = document.querySelectorAll('.weather div');
   weather.forEach((div) => div.remove());
+  document.querySelector('.error').innerHTML = '';
 }
 function createLocationContent(location) {
   return `
@@ -77,6 +98,15 @@ search.addEventListener('keydown', (event) => {
     renderPage(search.value);
   }
 });
+
+async function tryFetch(location) {
+  const forecast = fetch(
+    `http://api.weatherapi.com/v1/sports.json?key=${weatherApiKey}&q=${location}`
+  );
+  return (await forecast).json();
+}
+
+// console.log(tryFetch('addis abeba'));
 
 // name ,country, local ti``?me
 // temp c,f
