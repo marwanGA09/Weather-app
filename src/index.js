@@ -1,19 +1,19 @@
 import './tailwind.css';
 const weatherApiKey = 'afbc932eb78247838c451817240703';
-
+const icon = document.querySelector('#icon');
 async function getWeatherFromApi(location) {
   for (let i = 0; i < 100000; i++) {}
   const weather = await fetch(
-    `http://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${location}`
+    `https://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${location}`
   );
   const result = await weather.json();
-  console.log(result.location);
+  console.log(result.current.condition.icon);
+  icon.src = result.current.condition.icon;
   return result;
 }
 console.log('warking');
-const data = getWeatherFromApi('london');
+const data = getWeatherFromApi('addis abeba');
 console.log(data);
-data.then((data) => console.log(data));
 data.then((data) => console.log(data));
 
 // name ,country, local ti``?me

@@ -6,21 +6,39 @@
     <title>Weather api</title>
   </head>
   <body>
-    <main>
-      <div class="container bg-red-900">
-        <div class="location">
-          <p class="city">Adama</p>
-          <p class="country">Ethiopia</p>
-          <p class="time">12/01/2024 12:30</p>
-        </div>
-        <div class="weather">
-          <div class="condition">
-            <span class="text">Cloudy with rain</span>
-            <div class="icon">icons</div>
+    <main class="h-screen p-3">
+      <div
+        style="background-image: url(./img/weather-bg.jpg)"
+        class="rounded bg-cover h-full"
+      >
+        <h2 class="pt-20 text-center text-3xl text-gray-200 italic font-bold">
+          International weather forecast
+        </h2>
+        <div class="container flex flex-col gap-3 px-4 py-4 text-gray-100">
+          <div
+            class="px-4 location rounded-lg flex flex-col gap-1 bg-slate-500"
+          >
+            <p class="country text-2xl">Adama, Ethiopia</p>
+            <p class="time text-xl text-gray-300">12/01/2024 12:30</p>
           </div>
-          <div class="wind">34 kmh</div>
-          <div class="humidity">40%</div>
-          <div class="cloud">37%</div>
+          <div class="weather p-5 bg-slate-500 rounded-lg flex flex-col gap-2">
+            <div class="condition">
+              <span class="text">Weather condition: cloudy with rain</span>
+              <div class="icon"><img id="icon" src="#" alt="" /></div>
+            </div>
+            <div class="flex justify-between wind">
+              <p>Wind speed: 34 kmh</p>
+              <img class="w-6 h-6" src="./img/wind.png" alt="" />
+            </div>
+            <div class="flex justify-between humidity">
+              <p>Humidity: 40%</p>
+              <img src="./img/humidity.webp" alt="" class="w-6 h-6" />
+            </div>
+            <div class="flex justify-between cloud">
+              <p>Cloud coverage: 37%</p>
+              <img src="./img/cloud.png" alt="" class="w-6 h-6" />
+            </div>
+          </div>
         </div>
       </div>
     </main>
