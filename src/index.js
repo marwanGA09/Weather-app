@@ -26,7 +26,7 @@ function removeChild() {
   const location = document.querySelectorAll('.location p');
   location.forEach((p) => p.remove());
   const weather = document.querySelectorAll('.weather div');
-  location.forEach((div) => div.remove());
+  weather.forEach((div) => div.remove());
 }
 function createLocationContent(location) {
   return `
@@ -73,7 +73,6 @@ const search = document.querySelector('#search');
 search.addEventListener('keydown', (event) => {
   // console.log(event.key);
   if (event.key === 'Enter') {
-    console.log(search.value);
     removeChild();
     renderPage(search.value);
   }
