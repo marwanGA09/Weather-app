@@ -50,7 +50,7 @@ function renderPage(place) {
     });
 }
 
-renderPage('addis abeba');
+// renderPage('addis abeba');
 function removeChild() {
   const location = document.querySelectorAll('.location p');
   location.forEach((p) => p.remove());
