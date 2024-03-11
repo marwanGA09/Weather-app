@@ -1,5 +1,6 @@
 import './tailwind.css';
 const weatherApiKey = 'afbc932eb78247838c451817240703';
+let metricUnit = true;
 async function getWeatherFromApi(location) {
   try {
     const weather = await fetch(
@@ -50,7 +51,7 @@ function renderPage(place) {
     });
 }
 
-// renderPage('addis abeba');
+renderPage('addis abeba');
 function removeChild() {
   const location = document.querySelectorAll('.location p');
   location.forEach((p) => p.remove());
@@ -71,8 +72,10 @@ function addFlag(country) {
 
 function createLocationContent(location) {
   return `
-            <p class="country text-2xl">${location.name}, ${location.country}</p>
-            <p class="time text-xl text-gray-300">${location.localtime}</p>`;
+              <p class="country text-2xl">
+              <span class="border-b-2 border-green-300">${location.name}</span>, ${location.country}
+            </p>
+            <p class="time text-xl text-gray-950">12/01/2024 12:30</p>`;
 }
 
 function createWeatherContent(weather) {
@@ -93,7 +96,7 @@ function createWeatherContent(weather) {
               />
             </div>
             <div class="flex justify-between md:items-center humidity">
-              <p>Humidity: ${weather.humidity}%</p>
+              <p>Humidity: ${weather.humidity}</p>
               <img
                 src="./img/humidity.webp"
                 alt=""
@@ -107,7 +110,7 @@ function createWeatherContent(weather) {
                 alt=""
                 class="w-6 h-6 md:w-11 md:h-10"
               />
-            </div> `;
+            </div>`;
 }
 
 const search = document.querySelector('#search');
@@ -124,3 +127,9 @@ async function fetchTest(country) {
 
   return flag.json();
 }
+
+const unit = document.querySelector('.unit');
+unit.addEventListener('change', () => {
+  metricUnit = metricUnit ? false : true;
+  console.log('run function based on metric ', metricUnit);
+});
