@@ -15,7 +15,6 @@ function renderPage(place) {
   let weather = getWeatherFromApi(place);
   weather
     .then((data) => {
-      console.log(data);
       if (data.error) {
         throw new Error(`${data.error.message}`);
       } else {
@@ -38,6 +37,10 @@ function renderPage(place) {
         'afterend',
         `<span class="error text-gray-200">${error.message} ${place}</span>`
       );
+    })
+    .finally(() => {
+      const search = document.querySelector('#search');
+      search.value = '';
     });
 }
 
