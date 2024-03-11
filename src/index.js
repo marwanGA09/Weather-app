@@ -1,6 +1,20 @@
 import './tailwind.css';
+import cloud from './img/cloud.png';
+import humidity from './img/humidity.webp';
+import wind from './img/wind.png';
+import bg from './img/roadandrain.jpeg';
+console.log(cloud);
 const weatherApiKey = 'afbc932eb78247838c451817240703';
-let metricUnit = true;
+const container = document.querySelector('.container');
+container.setAttribute(
+  'style',
+  ` background-image: linear-gradient(
+              rgba(73, 220, 73, 0.369),
+              rgba(241, 71, 71, 0.39)
+            ),
+            url(${bg});`
+);
+
 async function getWeatherFromApi(location) {
   const weather = await fetch(
     `https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${location}`
@@ -84,14 +98,14 @@ function createWeatherContent(weather) {
               <p>Wind speed: ${weather.wind_kph}kmh to ${weather.wind_dir}</p>
               <img
                 class="w-6 h-6 md:w-11 md:h-10"
-                src="./img/wind.png"
+                src="${wind}"
                 alt=""
               />
             </div>
             <div class="flex justify-between md:items-center humidity">
               <p>Humidity: ${weather.humidity}</p>
               <img
-                src="./img/humidity.webp"
+                src="${humidity}"
                 alt=""
                 class="w-6 h-6 md:w-11 md:h-10"
               />
@@ -99,7 +113,7 @@ function createWeatherContent(weather) {
             <div class="flex justify-between md:items-center cloud">
               <p>Cloud coverage: ${weather.cloud}%</p>
               <img
-                src="./img/cloud.png"
+                src="${cloud}"
                 alt=""
                 class="w-6 h-6 md:w-11 md:h-10"
               />
@@ -118,5 +132,5 @@ search.addEventListener('keydown', (event) => {
 async function fetchTest(country) {
   const flag = await fetch(`https://restcountries.com/v3.1/name/${country}`);
 
-  return flag.json();
+  return await flag.json();
 }
