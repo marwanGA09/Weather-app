@@ -1,5 +1,5 @@
 import './tailwind.css';
-import cloud from './img/cloud.png';
+import cloud from './img/cloud.jpg';
 import humidity from './img/humidity.webp';
 import wind from './img/wind.png';
 import bg from './img/roadandrain.jpeg';
