@@ -2,17 +2,13 @@ import './tailwind.css';
 const weatherApiKey = 'afbc932eb78247838c451817240703';
 let metricUnit = true;
 async function getWeatherFromApi(location) {
-  try {
-    const weather = await fetch(
-      `https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${location}`
-    );
-    if (!weather.ok) {
-      throw new Error(`Error fetching weather data: ${weather.statusText}`);
-    }
-    return await weather.json();
-  } catch (er) {
-    console.error('errorrrr', er);
+  const weather = await fetch(
+    `https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${location}`
+  );
+  if (!weather.ok) {
+    throw new Error(`Error fetching weather data: ${weather.statusText}`);
   }
+  return await weather.json();
 }
 
 function renderPage(place) {
@@ -34,20 +30,14 @@ function renderPage(place) {
           .querySelector('.weather')
           .insertAdjacentHTML('afterbegin', createWeatherContent(data.current));
       }
-      // console.log(data.location.country);
       addFlag(data.location.country);
-
-      // console.log(data);
     })
     .catch((error) => {
-      // console.error(error);
       const errorSpan = document.querySelector('#label');
       errorSpan.insertAdjacentHTML(
         'afterend',
-        `<span class="error text-gray-200">${error.message}</span>`
+        `<span class="error text-gray-200">${error.message} ${place}</span>`
       );
-      // renderPage('addis abeba');
-      // console.log(errorSpan);
     });
 }
 
@@ -127,9 +117,3 @@ async function fetchTest(country) {
 
   return flag.json();
 }
-
-const unit = document.querySelector('.unit');
-unit.addEventListener('change', () => {
-  metricUnit = metricUnit ? false : true;
-  console.log('run function based on metric ', metricUnit);
-});
