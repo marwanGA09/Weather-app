@@ -82,7 +82,7 @@ function createLocationContent(location) {
               <p class="country text-2xl">
               <span class="border-b-2 border-green-300">${location.name}</span>, ${location.country}
             </p>
-            <p class="time text-xl text-gray-950">12/01/2024 12:30</p>`;
+            <p class="time text-xl text-gray-950">${location.localtime}</p>`;
 }
 
 function createWeatherContent(weather) {
