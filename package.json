@@ -1,7 +1,7 @@
 {
-  "name": "to-do-app",
+  "name": "weather-app",
   "version": "1.0.0",
-  "description": "This is a simple to-do app built using [html,scss & javascript].",
+  "description": "This is a simple weather-app built using [html,scss & javascript].",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js --open",
