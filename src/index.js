@@ -3,7 +3,6 @@ import cloud from './img/cloud.jpg';
 import humidity from './img/humidity.webp';
 import wind from './img/wind.png';
 import bg from './img/roadandrain.jpeg';
-console.log(cloud);
 const weatherApiKey = 'afbc932eb78247838c451817240703';
 const container = document.querySelector('.container');
 container.setAttribute(
@@ -32,6 +31,7 @@ function renderPage(place) {
       if (data.error) {
         throw new Error(`${data.error.message}`);
       } else {
+        console.log(data);
         document
           .querySelector('.location')
           .insertAdjacentHTML(
@@ -44,12 +44,13 @@ function renderPage(place) {
           .insertAdjacentHTML('afterbegin', createWeatherContent(data.current));
       }
       addFlag(data.location.country);
+      console.log(data.location.country);
     })
     .catch((error) => {
       const errorSpan = document.querySelector('#label');
       errorSpan.insertAdjacentHTML(
         'afterend',
-        `<span class="error text-gray-200">${error.message} ${place}</span>`
+        `<span class="error absolute top-12 text-red-700">${error.message} ${place}</span>`
       );
     })
     .finally(() => {
@@ -73,7 +74,10 @@ function removeChild() {
 function addFlag(country) {
   const flag = fetchTest(country);
   flag.then((flag) => {
-    document.querySelector('.flag').src = flag[0].flags.png;
+    console.log(flag[0].flags.png);
+    document.querySelector('.flag').src = flag[0].flags.png
+      ? flag[0].flags.png
+      : '';
   });
 }
 

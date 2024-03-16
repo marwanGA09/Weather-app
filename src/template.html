@@ -6,17 +6,76 @@
     <title>Weather api</title>
   </head>
   <body>
-    <main class="h-screen p-3 flex justify-center">
-      <div
-        style="width: 99vw"
-        class="container rounded bg-cover flex items-center flex-col"
+    <main class="h-max w-screen p-1 flex flex-col items-center mx-auto">
+      <nav
+        class="flex justify-between w-full bg-blue-300 items-center flex-wrap"
       >
+        <div>
+          <?xml version="1.0" encoding="utf-8"?>
+          <svg
+            width="80px"
+            height="70px"
+            viewBox="0 0 48 48"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <style>
+                .a {
+                  fill: none;
+                  stroke: #c22d2d;
+                  stroke-linecap: round;
+                  stroke-linejoin: round;
+                  stroke-width: 2.5px;
+                }
+                .b {
+                  fill: #15b225;
+                }
+              </style>
+            </defs>
+            <path
+              class="a"
+              d="M21.6923,31.1556H13.0648c-9.0177-.8034-8.9693-13.9941.0537-14.7357,1.6552-6.32,6.6424-9.0822,11.436-8.8242a10.9,10.9,0,0,1,9.1789,5.8684c11.2533,1.9347,9.8991,16.3587,0,17.6915H24.547"
+            />
+            <path
+              class="a"
+              d="M19.0483,8.7135a6.6853,6.6853,0,1,0-9.4412,8.6974"
+            />
+            <path
+              class="a"
+              d="M25.15,25.3645l-4.729,8.6845,3.1309,1.5864-1.35,6.5585,5.2194-7.73-3.0482-1.63Z"
+            />
+            <circle class="b" cx="17.4575" cy="33.6491" r="2" />
+            <circle class="b" cx="28.4314" cy="39.6251" r="2" />
+            <circle class="b" cx="30.495" cy="34.7347" r="2" />
+            <circle class="b" cx="11.9614" cy="34.8422" r="2" />
+            <circle class="b" cx="17.8982" cy="37.7119" r="2" />
+            <circle class="b" cx="37.6533" cy="34.0361" r="2" />
+            <circle class="b" cx="34.4933" cy="41.4439" r="2" />
+            <circle class="b" cx="34.0634" cy="36.9166" r="2" />
+            <circle class="b" cx="14.1256" cy="42.1939" r="2" />
+          </svg>
+        </div>
+        <div class="flex gap-4 px-8 flex-wrap">
+          <label id="label" for="search" class="text-brown-200 sm:text-2xl pl-5"
+            >Search for city/place:
+            <input
+              type="search"
+              name="search"
+              id="search"
+              class="border-0 rounded md:px-2 text-gray-800 ml-4 pl-1 p-0"
+              style="background-color: rgba(214, 214, 214, 0.653)"
+          /></label>
+          <button>HOME</button>
+          <button>ABOUT</button>
+        </div>
+      </nav>
+      <div class="container rounded bg-cover flex items-center flex-col">
         <h2
-          class="pt-20 text-center text-3xl text-brown-200 capitalize italic font-bold sm:text-5xl"
+          class="pt-6 text-center text-3xl text-brown-200 capitalize italic font-bold sm:text-5xl"
         >
           International weather forecast
         </h2>
-        <div class="container flex flex-col gap-3 px-4 py-4 text-brown-400">
+        <div class="flex flex-col gap-3 px-4 py-4 text-brown-400">
           <div
             class="location px-8 py-1 rounded-lg flex flex-col gap-1 self-start"
             style="background-color: rgba(112, 112, 112, 0.327)"
@@ -64,16 +123,12 @@
             </div> -->
           </div>
         </div>
-        <label id="label" for="search" class="text-brown-200 sm:text-2xl pl-5"
-          >Search for city/place:
-          <input
-            type="search"
-            name="search"
-            id="search"
-            class="border-0 rounded md:py-2 md:px-3 text-gray-800 ml-4 pl-5"
-            style="background-color: rgba(214, 214, 214, 0.653)"
-        /></label>
-        <img src="#" alt="" class="flag mt-12 w-28 h-auto rounded-lg md:w-80" />
+
+        <img
+          src="#"
+          alt=""
+          class="flag mt-2 sm:mt-12 w-28 h-auto rounded-lg md:w-80"
+        />
       </div>
     </main>
   </body>
