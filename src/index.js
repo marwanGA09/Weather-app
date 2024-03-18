@@ -36,7 +36,10 @@ function renderPage(place) {
           .querySelector('.location')
           .insertAdjacentHTML(
             'afterbegin',
-            createLocationContent(data.location)
+            createLocationContent(
+              data.location,
+              data.forecast.forecastday[0].astro
+            )
           );
 
         document
@@ -81,15 +84,18 @@ function addFlag(country) {
   });
 }
 
-function createLocationContent(location) {
+function createLocationContent(location, forecast) {
+  console.log(forecast);
   return `
               <p class="country text-2xl">
               <span class="border-b-2 border-green-300">${location.name}</span>, ${location.country}
             </p>
-            <p class="time text-xl text-gray-950">${location.localtime}</p>`;
+            <p class="time text-xl text-gray-950">${location.localtime}</p>
+            <p class="sun-rise text-xl text-gray-950">Sun rise at: ${forecast.sunrise}</p>
+             <p class="sun-set text-xl text-gray-950">Sun set at: ${forecast.sunset}</p>`;
 }
 
-function createWeatherContent(weather) {
+function createWeatherContent(weather, forecast) {
   return `<div
               class="condition md:flex md:justify-between md:items-center lg:col-span-3"
             >
