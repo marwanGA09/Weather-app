@@ -4,7 +4,7 @@ import humidity from './img/humidity.webp';
 import wind from './img/wind.png';
 import bg from './img/roadandrain.jpeg';
 const weatherApiKey = 'afbc932eb78247838c451817240703';
-const container = document.querySelector('.container');
+const container = document.querySelector('.my-container');
 container.setAttribute(
   'style',
   ` background-image: linear-gradient(
@@ -109,6 +109,7 @@ function createWeatherContent(current, forecast) {
             </div>
             <div class="flex justify-between md:items-center temp">Max-Temperature: ${forecast.maxtemp_c} °C</div>
             <div class="flex justify-between md:items-center temp">Min-Temperature: ${forecast.mintemp_c} °C</div>
+            <div class="flex justify-between md:items-center rain-chance">Chance of rain: ${forecast.daily_chance_of_rain}%</div>
             <div class="flex justify-between md:items-center wind">
               <p>Wind speed: ${current.wind_kph}kmh to ${current.wind_dir}</p>
               <img
