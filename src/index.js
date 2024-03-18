@@ -44,7 +44,10 @@ function renderPage(place) {
 
         document
           .querySelector('.weather')
-          .insertAdjacentHTML('afterbegin', createWeatherContent(data.current));
+          .insertAdjacentHTML(
+            'afterbegin',
+            createWeatherContent(data.current, data.forecast.forecastday[0].day)
+          );
       }
       addFlag(data.location.country);
       console.log(data.location.country);
@@ -85,7 +88,6 @@ function addFlag(country) {
 }
 
 function createLocationContent(location, forecast) {
-  console.log(forecast);
   return `
               <p class="country text-2xl">
               <span class="border-b-2 border-green-300">${location.name}</span>, ${location.country}
@@ -95,17 +97,20 @@ function createLocationContent(location, forecast) {
              <p class="sun-set text-xl text-gray-950">Sun set at: ${forecast.sunset}</p>`;
 }
 
-function createWeatherContent(weather, forecast) {
+function createWeatherContent(current, forecast) {
+  console.log(forecast);
   return `<div
               class="condition md:flex md:justify-between md:items-center lg:col-span-3"
             >
-              <span class="text">Weather condition: ${weather.condition.text}</span>
+              <span class="text">Weather condition: ${forecast.condition.text}</span>
               <div class="icon md:w-11 md:h-10">
-                <img id="icon" src="${weather.condition.icon}" alt="" />
+                <img id="icon" src="${forecast.condition.icon}" alt="" />
               </div>
             </div>
+            <div class="flex justify-between md:items-center temp">Max-Temperature: ${forecast.maxtemp_c} °C</div>
+            <div class="flex justify-between md:items-center temp">Min-Temperature: ${forecast.mintemp_c} °C</div>
             <div class="flex justify-between md:items-center wind">
-              <p>Wind speed: ${weather.wind_kph}kmh to ${weather.wind_dir}</p>
+              <p>Wind speed: ${current.wind_kph}kmh to ${current.wind_dir}</p>
               <img
                 class="w-6 h-6 md:w-11 md:h-10"
                 src="${wind}"
@@ -113,7 +118,7 @@ function createWeatherContent(weather, forecast) {
               />
             </div>
             <div class="flex justify-between md:items-center humidity">
-              <p>Humidity: ${weather.humidity}</p>
+              <p>Humidity: ${current.humidity}</p>
               <img
                 src="${humidity}"
                 alt=""
@@ -121,7 +126,7 @@ function createWeatherContent(weather, forecast) {
               />
             </div>
             <div class="flex justify-between md:items-center cloud">
-              <p>Cloud coverage: ${weather.cloud}%</p>
+              <p>Cloud coverage: ${current.cloud}%</p>
               <img
                 src="${cloud}"
                 alt=""
